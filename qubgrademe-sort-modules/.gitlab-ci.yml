@@ -1,0 +1,17 @@
+image: php
+
+before_script:
+  - apt-get update -yqq
+  - apt-get install git -yqq
+  - curl -sS https://getcomposer.org/installer | php
+
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+  - wget https://phar.phpunit.de/phpunit.phar
+  - chmod +x phpunit.phar
+  - mv phpunit.phar /usr/local/bin/phpunit
+
+  - php composer.phar install
+
+tests:
+  script:
+    - phpunit src/functionTest.php
